@@ -1,0 +1,15 @@
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\bin\Debug\net9.0\Lab_00.exe
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\bin\Debug\net9.0\Lab_00.deps.json
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\bin\Debug\net9.0\Lab_00.runtimeconfig.json
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\bin\Debug\net9.0\Lab_00.dll
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\bin\Debug\net9.0\Lab_00.pdb
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\obj\Debug\net9.0\Lab_00.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\obj\Debug\net9.0\Lab_00.AssemblyInfoInputs.cache
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\obj\Debug\net9.0\Lab_00.AssemblyInfo.cs
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\obj\Debug\net9.0\Lab_00.csproj.CoreCompileInputs.cache
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\obj\Debug\net9.0\Lab_00.sourcelink.json
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\obj\Debug\net9.0\Lab_00.dll
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\obj\Debug\net9.0\refint\Lab_00.dll
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\obj\Debug\net9.0\Lab_00.pdb
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\obj\Debug\net9.0\Lab_00.genruntimeconfig.cache
+C:\Users\nikto\UniversityProjects_Shparov\labs\Lab_00\obj\Debug\net9.0\ref\Lab_00.dll
