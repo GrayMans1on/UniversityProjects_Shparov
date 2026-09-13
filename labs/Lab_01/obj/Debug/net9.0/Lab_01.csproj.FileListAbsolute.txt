@@ -1,0 +1,15 @@
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\bin\Debug\net9.0\Lab_01.exe
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\bin\Debug\net9.0\Lab_01.deps.json
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\bin\Debug\net9.0\Lab_01.runtimeconfig.json
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\bin\Debug\net9.0\Lab_01.dll
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\bin\Debug\net9.0\Lab_01.pdb
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\obj\Debug\net9.0\Lab_01.GeneratedMSBuildEditorConfig.editorconfig
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\obj\Debug\net9.0\Lab_01.AssemblyInfoInputs.cache
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\obj\Debug\net9.0\Lab_01.AssemblyInfo.cs
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\obj\Debug\net9.0\Lab_01.csproj.CoreCompileInputs.cache
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\obj\Debug\net9.0\Lab_01.sourcelink.json
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\obj\Debug\net9.0\Lab_01.dll
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\obj\Debug\net9.0\refint\Lab_01.dll
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\obj\Debug\net9.0\Lab_01.pdb
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\obj\Debug\net9.0\Lab_01.genruntimeconfig.cache
+D:\ArtVlad\UniversityProjects_Shparov\labs\Lab_01\obj\Debug\net9.0\ref\Lab_01.dll
