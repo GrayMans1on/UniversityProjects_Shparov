@@ -1,0 +1,42 @@
+# Visual Studio
+.vs
+.user
+.suo
+.userosscache
+.sln.docstates
+
+# Build output
+[Bb]in
+[Oo]bj
+
+# .NET generated files
+.dll
+.exe
+.pdb
+
+# NuGet
+packages
+.nupkg
+.snupkg
+
+# Test results
+TestResults
+.trx
+
+# Coverage
+coverage
+.coverage
+.coveragexml
+
+# Rider  ReSharper
+.idea
+_ReSharper
+.[Rr]e[Ss]harper
+.DotSettings.user
+
+# Visual Studio Code
+.vscode
+
+# OS
+.DS_Store
+Thumbs.db
