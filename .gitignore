@@ -1,41 +1,41 @@
 # Visual Studio
-.vs
-.user
-.suo
-.userosscache
-.sln.docstates
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
 
 # Build output
-[Bb]in
-[Oo]bj
+[Bb]in/
+[Oo]bj/
 
 # .NET generated files
-.dll
-.exe
-.pdb
+*.dll
+*.exe
+*.pdb
 
 # NuGet
-packages
-.nupkg
-.snupkg
+packages/
+*.nupkg
+*.snupkg
 
 # Test results
-TestResults
-.trx
+TestResults/
+*.trx
 
 # Coverage
-coverage
-.coverage
-.coveragexml
+coverage/
+*.coverage
+*.coveragexml
 
-# Rider  ReSharper
-.idea
-_ReSharper
-.[Rr]e[Ss]harper
-.DotSettings.user
+# Rider / ReSharper
+.idea/
+_ReSharper*/
+*.[Rr]e[Ss]harper*
+*.DotSettings.user
 
 # Visual Studio Code
-.vscode
+.vscode/
 
 # OS
 .DS_Store
