@@ -17,11 +17,14 @@ internal class Program
 
     static void Main()
     {
-        string[] logs = File.ReadAllLines("event_server.log")[..5];
-
-        foreach (string log in logs)
+        if (File.Exists("event_server.log"))
         {
-            Console.WriteLine(GetLog(log));
+            string[] logs = File.ReadAllLines("event_server.log");
+
+            foreach (string log in logs)
+            {
+                Console.WriteLine(GetLog(log));
+            }
         }
     }
 }
