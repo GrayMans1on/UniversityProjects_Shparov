@@ -1,4 +1,3 @@
 <h1>Проекты по программированию. Шпаров Владислав. ЧелГУ ПрИ-11</h1>
 
-По структуре в labs/ лежат лабы отдельными папками: labs/Lab_00, labs/Lab_01 и т.п.<br>
-Аналогично в practics/ лежат практики: practics/Practic_00 и т.п.
+https://github.com/StriderAJR/StudentCs/tree/main
