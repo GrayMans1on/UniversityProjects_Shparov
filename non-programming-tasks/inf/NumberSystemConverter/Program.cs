@@ -126,14 +126,6 @@ internal class Program
 
         return result;
     }
-    static void Main()
-    {
-        TryCharToDecNumber('Z', out int num);
-        Console.WriteLine(num);
-
-        Console.WriteLine(ConvertFromDec(255, 2));
-    }
-
     private static bool TryCharToDecNumber(char c, out int num)
     {
         num = 0;
@@ -199,5 +191,204 @@ internal class Program
             }
         }
         return result;
+    }
+    public static int ExplainConvertToDec(string num, int systemBase)
+    {
+        int result = 0;
+
+        Console.WriteLine();
+        Console.WriteLine($"Перевод {num} из системы с основанием {systemBase} в десятичную:");
+        Console.WriteLine();
+
+        for (int i = 0; i < num.Length; i++)
+        {
+            if (!TryCharToDecNumber(num[i], out int value))
+            {
+                Console.WriteLine($"Ошибка: недопустимый символ '{num[i]}'.");
+                return -1;
+            }
+
+            if (value >= systemBase)
+            {
+                Console.WriteLine($"Ошибка: цифра '{num[i]}' не существует в этой системе.");
+                return -1;
+            }
+
+            int power = num.Length - i - 1;
+            int part = value * (int)Math.Pow(systemBase, power);
+
+            Console.WriteLine(
+                $"{num[i]} = {value}, разряд: {power}, " +
+                $"{value} * {systemBase}^{power} = {part}");
+
+            result += part;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine($"Сумма = {result}");
+
+        return result;
+    }
+    public static string ExplainConvertFromDec(int num, int systemBaseTo)
+    {
+        if (num == 0)
+        {
+            Console.WriteLine("0 в любой системе счисления остаётся 0.");
+            return "0";
+        }
+
+        string result = "";
+        int current = num;
+
+        Console.WriteLine();
+        Console.WriteLine($"Перевод {num} из десятичной системы в систему с основанием {systemBaseTo}:");
+        Console.WriteLine();
+
+        int step = 1;
+
+        while (current > 0)
+        {
+            int remain = current % systemBaseTo;
+            int quotient = current / systemBaseTo;
+
+            if (!TryDecNumberToChar(remain, out char c))
+            {
+                Console.WriteLine("Ошибка при переводе остатка.");
+                return "";
+            }
+
+            Console.WriteLine(
+                $"Шаг {step}: {current} / {systemBaseTo} = {quotient}, остаток {remain} ({c})");
+
+            result = c + result;
+            current = quotient;
+            step++;
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("Читаем остатки снизу вверх:");
+        Console.WriteLine(result);
+
+        Console.WriteLine();
+        Console.WriteLine($"Результат: {num} = {result}");
+
+        return result;
+    }
+    public static string ExplainConvert(string num, int systemBaseFrom, int systemBaseTo)
+    {
+        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        Console.WriteLine("ПЕРЕВОД СИСТЕМ СЧИСЛЕНИЯ");
+        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        if (systemBaseFrom == 10)
+        {
+            if (int.TryParse(num, out int newNum))
+            {
+                return ExplainConvertFromDec(newNum, systemBaseTo);
+            }
+            else
+            {
+                return "";
+            }
+        }
+        else if (systemBaseTo == 10)
+        {
+            return ExplainConvertToDec(num, systemBaseFrom).ToString();
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("Этап 1. Перевод в десятичную систему.");
+
+        int decimalNumber = ExplainConvertToDec(num, systemBaseFrom);
+
+        if (decimalNumber == -1)
+        {
+            return "";
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("Этап 2. Перевод из десятичной системы.");
+
+        string result = ExplainConvertFromDec(decimalNumber, systemBaseTo);
+
+        Console.WriteLine();
+        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+        Console.WriteLine($"Ответ: {num}({systemBaseFrom}) = {result}({systemBaseTo})");
+        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+
+        return result;
+    }
+    static void Main()
+    {
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+        Console.WriteLine("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n" +
+                          "   КАЛЬКУЛЯТОР СИСТЕМ СЧИСЛЕНИЯ\n" +
+                          "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\n\n" +
+                          "Поддерживаются системы счисления от 2 до 36\n" +
+                          "Для цифр больше 9 используются буквы A-Z\n");
+
+        while (true)
+        {
+            Console.Write("Введите число: ");
+            string num = Console.ReadLine().ToUpper();
+
+            if (num == "")
+            {
+                Console.WriteLine("Ошибка: число не может быть пустым\n");
+                continue;
+            }
+
+            Console.Write("Введите основание исходной системы: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int systemBaseFrom))
+            {
+                Console.WriteLine("Ошибка: основание должно быть целым числом\n");
+                continue;
+            }
+
+            if (systemBaseFrom < 2 || systemBaseFrom > 36)
+            {
+                Console.WriteLine("Ошибка: основание должно быть от 2 до 36!\n");
+                continue;
+            }
+
+            Console.Write("Введите основание новой системы: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int systemBaseTo))
+            {
+                Console.WriteLine("Ошибка: основание должно быть целым числом\n");
+                continue;
+            }
+
+            if (systemBaseTo < 2 || systemBaseTo > 36)
+            {
+                Console.WriteLine("Ошибка: основание должно быть от 2 до 36!\n");
+                continue;
+            }
+
+            Console.WriteLine();
+
+            string result = ExplainConvert(num, systemBaseFrom, systemBaseTo);
+
+            if (result == "")
+            {
+                Console.WriteLine("\nПеревод выполнить не удалось!");
+            }
+
+            Console.WriteLine("\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
+            Console.Write("Выполнить ещё один перевод? (Y/N): ");
+
+            string answer = Console.ReadLine().ToUpper();
+
+            if (answer != "Y")
+            {
+                break;
+            }
+
+            Console.WriteLine("\n\n");
+        }
+
+        Console.WriteLine();
+        Console.WriteLine("Работа программы завершена.");
     }
 }
