@@ -1,17 +1,258 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace SaveManager;
 public class Program
 {
     static void Main()
     {
-        SaveEntry[] entries = LoadIndex("..\\..\\..\\index.json");
-        Console.WriteLine(entries[1].UpdatedAt);
+        string _indexPath = "..\\..\\..\\index.json";
+        string _savesDirectory = "..\\..\\..\\saves";
+        string _backupsDirectory = "..\\..\\..\\backups";
 
-        SaveData newSave = new SaveData("Megachad", "Tilt Towers", new Vector2Int(15, 0), 150, new List<string>() { "Huita", "Shit" });
-        SaveEntry newEntry = new SaveEntry("save-03", "save-03.json", DateTime.Parse("2026-12-12T08:00:00"));
-        SaveGame("..\\..\\..\\saves", newEntry, newSave);
-        //DeleteSave("..\\..\\..\\saves", "..\\..\\..\\index.json", newEntry);
+        Directory.CreateDirectory(_savesDirectory);
+        Directory.CreateDirectory(_backupsDirectory);
+
+        SaveEntry[] entries = LoadIndex(_indexPath);
+
+        while (true)
+        {
+            Console.WriteLine("\nМенеджер сохранений");
+            Console.WriteLine("1 - Показать список сохранений");
+            Console.WriteLine("2 - Посмотреть данные сохранения");
+            Console.WriteLine("3 - Изменить данные персонажа");
+            Console.WriteLine("4 - Создать резервную копию");
+            Console.WriteLine("5 - Восстановить резервную копию");
+            Console.WriteLine("6 - Удалить сохранение");
+            Console.WriteLine("7 - Выйти (или любой другой символ)");
+            Console.Write("Введите действие: ");
+
+            string command = Console.ReadLine();
+
+            switch (command)
+            {
+                case "1":
+                    {
+                        Console.WriteLine("\nСписок сохранений:");
+
+                        foreach (SaveEntry entry in entries)
+                        {
+                            Console.WriteLine(
+                                entry.Name + " | " +
+                                entry.File + " | " +
+                                entry.UpdatedAt.ToString("yyyy-MM-ddTHH:mm:ss"));
+                        }
+
+                        break;
+                    }
+
+                case "2":
+                    {
+                        Console.Write("\nВведите имя сохранения: ");
+                        string name = Console.ReadLine();
+
+                        SaveEntry entry = FindByName(entries.ToList(), name);
+
+                        if (entry.Name == null)
+                        {
+                            Console.WriteLine("Сохранение не найдено!");
+                            continue;
+                        }
+
+                        SaveData save = LoadSave(_savesDirectory, entry);
+
+                        if (save == null)
+                        {
+                            continue;
+                        }
+
+                        PrintSave(entry, save);
+
+                        break;
+                    }
+
+                case "3":
+                    {
+                        Console.Write("\nВведите имя сохранения: ");
+                        string name = Console.ReadLine();
+
+                        SaveEntry entry = FindByName(entries.ToList(), name);
+
+                        if (entry.Name == null)
+                        {
+                            Console.WriteLine("Сохранение не найдено!");
+                            continue;
+                        }
+
+                        SaveData save = LoadSave(_savesDirectory, entry);
+
+                        if (save == null)
+                        {
+                            continue;
+                        }
+
+                        Console.WriteLine("\nТекущие данные:");
+                        PrintSave(entry, save);
+
+                        Console.Write("\nВведите новую карту или оставьте пусто: ");
+                        string mapBuffer = Console.ReadLine();
+
+                        if (mapBuffer != "")
+                        {
+                            save.Map = mapBuffer;
+                        }
+
+                        Console.Write("Введите новую координату X или оставьте пусто: ");
+                        string xBuffer = Console.ReadLine();
+
+                        if (xBuffer != "")
+                        {
+                            if (int.TryParse(xBuffer, out int x))
+                            {
+                                save.Position.X = x;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Некорректная координата X!");
+                            }
+                        }
+
+                        Console.Write("Введите новую координату Y или оставьте пусто: ");
+                        string yBuffer = Console.ReadLine();
+
+                        if (yBuffer != "")
+                        {
+                            if (int.TryParse(yBuffer, out int y))
+                            {
+                                save.Position.Y = y;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Некорректная координата Y!");
+                            }
+                        }
+
+                        Console.Write("Введите новое здоровье или оставьте пусто: ");
+                        string healthBuffer = Console.ReadLine();
+
+                        if (healthBuffer != "")
+                        {
+                            if (int.TryParse(healthBuffer, out int health))
+                            {
+                                save.Health = health;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Некорректное значение здоровья!");
+                            }
+                        }
+
+                        Console.WriteLine("Введите новый инвентарь через запятую или оставьте пусто:");
+                        string inventoryBuffer = Console.ReadLine();
+
+                        if (inventoryBuffer != "")
+                        {
+                            string[] inventoryItems = inventoryBuffer.Split(',');
+
+                            save.Inventory.Clear();
+
+                            foreach (string item in inventoryItems)
+                            {
+                                save.Inventory.Add(item.Trim());
+                            }
+                        }
+
+                        SaveGame(_savesDirectory, entry, save);
+
+                        for (int i = 0; i < entries.Length; i++)
+                        {
+                            if (entries[i].Name == entry.Name)
+                            {
+                                entries[i].UpdatedAt = DateTime.Now;
+                                break;
+                            }
+                        }
+
+                        SaveIndex(_indexPath, entries);
+
+                        Console.WriteLine("Сохранение изменено!");
+
+                        break;
+                    }
+
+                case "4":
+                    {
+                        Console.Write("\nВведите имя сохранения: ");
+                        string name = Console.ReadLine();
+
+                        SaveEntry entry = FindByName(entries.ToList(), name);
+
+                        if (entry.Name == null)
+                        {
+                            Console.WriteLine("Сохранение не найдено!");
+                            continue;
+                        }
+
+                        CreateBackup(_savesDirectory, _backupsDirectory, entry);
+
+                        Console.WriteLine("Резервная копия создана");
+
+                        break;
+                    }
+
+                case "5":
+                    {
+                        Console.Write("\nВведите имя сохранения: ");
+                        string name = Console.ReadLine();
+
+                        SaveEntry entry = FindByName(entries.ToList(), name);
+
+                        if (entry.Name == null)
+                        {
+                            Console.WriteLine("Сохранение не найдено!");
+                            continue;
+                        }
+
+                        RestoreBackup(_savesDirectory, _backupsDirectory, entry);
+
+                        break;
+                    }
+
+                case "6":
+                    {
+                        Console.Write("\nВведите имя сохранения: ");
+                        string name = Console.ReadLine();
+
+                        SaveEntry entry = FindByName(entries.ToList(), name);
+
+                        if (entry.Name == null)
+                        {
+                            Console.WriteLine("Сохранение не найдено!");
+                            continue;
+                        }
+
+                        DeleteSave(_savesDirectory, _indexPath, entry);
+
+                        entries = LoadIndex(_indexPath);
+
+                        Console.WriteLine("Сохранение удалено!");
+
+                        break;
+                    }
+
+                case "7":
+                    {
+                        return;
+                    }
+
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
     }
     public static SaveEntry[] LoadIndex(string indexPath)
     {
