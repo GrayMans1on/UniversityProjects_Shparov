@@ -1,0 +1,13 @@
+{
+  "Character": "Megachad",
+  "Map": "Tilt Towers",
+  "Position": {
+    "X": 15,
+    "Y": 0
+  },
+  "Health": 150,
+  "Inventory": [
+    "Huita",
+    "Shit"
+  ]
+}
