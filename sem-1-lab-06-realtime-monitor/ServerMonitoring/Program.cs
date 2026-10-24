@@ -11,6 +11,9 @@ public class Program
 
     private static List<ServerMeasurement> _measurements = new List<ServerMeasurement>();
     private const int MAX_MEASUREMENTS = 20;
+
+
+    public static List<ServerMeasurement> Measurements => _measurements;
     static void Main()
     {
         ServerMonitor monitor = new ServerMonitor();
@@ -53,23 +56,27 @@ public class Program
             File.WriteAllText(_configPath, json);
         }
     }
-    private static float ToKelvin(float celsiusTemp)
+    public static void AddMeasurement(ServerMeasurement measurement)
     {
-        return celsiusTemp + 273;
-    }
-
-    private static float ToFahrenheit(float celsiusTemp)
-    {
-        return celsiusTemp * 9F / 5F + 32F;
-    }
-    private static void OnDataReceived(float cpu, float ram, float temperature, DateTime timestamp)
-    {
-        _measurements.Add(new ServerMeasurement(cpu, ram, temperature, timestamp));
+        _measurements.Add(measurement);
 
         if (_measurements.Count > MAX_MEASUREMENTS)
         {
             _measurements.RemoveAt(0);
         }
+    }
+    public static float ToKelvin(float celsiusTemp)
+    {
+        return celsiusTemp + 273;
+    }
+
+    public static float ToFahrenheit(float celsiusTemp)
+    {
+        return celsiusTemp * 9F / 5F + 32F;
+    }
+    private static void OnDataReceived(float cpu, float ram, float temperature, DateTime timestamp)
+    {
+        AddMeasurement(new ServerMeasurement(cpu, ram, temperature, timestamp));
 
         Console.Clear();
 
@@ -78,7 +85,7 @@ public class Program
         Console.WriteLine();
         PrintGraphs();
     }
-    private static void PrintGraph(string name, List<float> values, float minValue, float maxValue)
+    public static void PrintGraph(string name, List<float> values, float minValue, float maxValue)
     {
         const int graphHeight = 10;
 
@@ -179,7 +186,7 @@ public class Program
                 }
         }
     }
-    private static void PrintCurrentData(float cpu, float ram, float temperature, DateTime timestamp)
+    public static void PrintCurrentData(float cpu, float ram, float temperature, DateTime timestamp)
     {
         string temperatureType = "°C";
 
