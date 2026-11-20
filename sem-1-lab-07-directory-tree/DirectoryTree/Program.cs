@@ -26,12 +26,17 @@ public class Program
             if (line.Contains("BEGIN"))
             {
                 char name = line[^1];
-                tree.Add(new TreeElement(name, currentOffset));
                 currentOffset++;
+                tree.Add(new TreeElement(name, currentOffset));
             }
             else if (line.Contains("END"))
             {
                 currentOffset--;
+            }
+            else if (line.Trim() != "")
+            {
+                char name = line[^1];
+                tree.Add(new TreeElement(name, currentOffset));
             }
         }
 
@@ -39,14 +44,37 @@ public class Program
     }
     private static void PrintTree(TreeElement[] tree)
     {
-        for (int i = 0; i < tree.Length - 1; i++)
+        for (int i = 0; i < tree.Length; i++)
         {
             int offset = tree[i].Offset;
-            switch (offset)
+
+            for (int j = 0; j < offset; j++)
             {
-                default:
-                    Console.WriteLine("│ " * offset);
+                Console.Write("│ ");
             }
+
+            if (offset == 0)
+            {
+                Console.WriteLine($" {tree[i].Var}");
+                continue;
+            }
+
+            if (i == tree.Length - 1)
+            {
+                Console.Write("└─");
+            }
+            else
+            {
+                if (offset > tree[i + 1].Offset)
+                {
+                    Console.Write("└─");
+                }
+                else
+                {
+                    Console.Write("├─");
+                }
+            }
+            Console.WriteLine($" {tree[i].Var}");
         }
     }
 
