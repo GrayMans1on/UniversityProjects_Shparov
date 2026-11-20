@@ -19,7 +19,7 @@ public class Program
     private static TreeElement[] CollectTree(string[] lines)
     {
         List<TreeElement> tree = new List<TreeElement>();
-        int currentOffset = 0;
+        int currentOffset = -1;
 
         foreach (string line in lines)
         {
@@ -53,7 +53,7 @@ public class Program
                 Console.Write("│ ");
             }
 
-            if (offset == 0)
+            if (offset == -1)
             {
                 Console.WriteLine($" {tree[i].Var}");
                 continue;
