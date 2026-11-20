@@ -13,10 +13,10 @@ public class Program
 
         TreeElement[] tree = CollectTree(_lines);
 
-        PrintTree(tree);
+        Console.WriteLine(PrintTree(tree));
     }
 
-    private static TreeElement[] CollectTree(string[] lines)
+    public static TreeElement[] CollectTree(string[] lines)
     {
         List<TreeElement> tree = new List<TreeElement>();
         int currentOffset = -1;
@@ -42,40 +42,43 @@ public class Program
 
         return tree.ToArray();
     }
-    private static void PrintTree(TreeElement[] tree)
+    public static string[] PrintTree(TreeElement[] tree)
     {
+        string[] result = new string[tree.Length];
         for (int i = 0; i < tree.Length; i++)
         {
+            result[i] = "";
             int offset = tree[i].Offset;
 
             for (int j = 0; j < offset; j++)
             {
-                Console.Write("│ ");
+                result[i] += "│ ";
             }
 
             if (offset == -1)
             {
-                Console.WriteLine($" {tree[i].Var}");
+                result[i] += $" {tree[i].Var}";
                 continue;
             }
 
             if (i == tree.Length - 1)
             {
-                Console.Write("└─");
+                result[i] += "└─";
             }
             else
             {
                 if (offset > tree[i + 1].Offset)
                 {
-                    Console.Write("└─");
+                    result[i] += "└─";
                 }
                 else
                 {
-                    Console.Write("├─");
+                    result[i] += "├─";
                 }
             }
-            Console.WriteLine($" {tree[i].Var}");
+            result[i] += $" {tree[i].Var}";
         }
+        return result;
     }
 
 
