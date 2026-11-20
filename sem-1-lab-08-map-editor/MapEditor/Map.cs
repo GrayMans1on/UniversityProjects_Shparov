@@ -22,7 +22,7 @@ public class Map
         List<Cell> removedCells = new List<Cell>();
         foreach (Cell cell in _cells)
         {
-            if (cell.Position.X > _width || cell.Position.Y > _width)
+            if (cell.Position.X > _width || cell.Position.Y > _height)
             {
                 removedCells.Add(cell);
             }
@@ -44,7 +44,7 @@ public class Map
         removedCells = new List<Cell>(); // клетки, оказавшиеся за пределами карты удаляются, но выводятся через out
         foreach (Cell cell in _cells)
         {
-            if (cell.Position.X > _width || cell.Position.Y > _width)
+            if (cell.Position.X > _width || cell.Position.Y > _height)
             {
                 removedCells.Add(cell);
             }
@@ -59,9 +59,13 @@ public class Map
         return removedCells.Count > 0;
     }
 
-    public Map()
+    public Map(int width, int height, Cell[] cells, Player player)
     {
-        
+        if (width <= 0 || height <= 0) { throw new Exception("Размеры карты должны быть положительными"); }
+        _width = width;
+        _height = height;
+        _cells = cells.ToList();
+        _player = player;
     }
 
     public bool AddCell(Cell cell)
@@ -69,5 +73,33 @@ public class Map
         if (cell.Position.X > Width || cell.Position.Y > Height) { return false; }
         _cells.Add(cell);
         return true;
+    }
+    public void RemoveCell(Cell cell)
+    {
+        if (_cells.Contains(cell))
+        {
+            _cells.Remove(cell);
+        }
+    }
+
+    public void MovePlayer(Direction dir)
+    {
+        switch (dir)
+        {
+            case Direction.North:
+
+                break;
+            case Direction.South:
+
+                break;
+            case Direction.East:
+
+                break;
+            case Direction.West:
+
+                break;
+            default:
+                throw new Exception("Ошибка при задании направления");
+        }
     }
 }

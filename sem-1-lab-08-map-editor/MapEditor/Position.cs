@@ -8,17 +8,17 @@ public struct Position
     public int X => _x;
     public int Y => _y;
 
-    public bool SetPosition(int x, int y)
+    public void SetPosition(int x, int y)
     {
-        if (x <= 0 || y <= 0) { return false; }
+        if (x <= 0 || y <= 0) { throw new Exception("Координаты должны быть положительными значениями"); }
         _x = x;
         _y = y;
-        return true;
     }
 
     public Position(int x, int y)
     {
-        _x = Math.Max(x, 1);
-        _y = Math.Max(y, 1);
+        if (x <= 0 || y <= 0) { throw new Exception("Координаты должны быть положительными значениями"); }
+        _x = x;
+        _y = y;
     }
 }

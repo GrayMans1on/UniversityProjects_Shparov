@@ -16,3 +16,10 @@ public struct Player
         _position = pos;
     }
 }
+public enum Direction
+{
+    North, // север (низ)
+    South, // юг (верх)
+    East, // восток (право)
+    West // запад (лево)
+}
