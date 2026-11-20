@@ -20,7 +20,6 @@ public struct Cell
 }
 public enum CellType
 {
-    Empty,
     Wall,
     Water
 }

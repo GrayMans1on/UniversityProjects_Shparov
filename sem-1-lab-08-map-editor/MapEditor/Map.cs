@@ -81,25 +81,54 @@ public class Map
             _cells.Remove(cell);
         }
     }
-
-    public void MovePlayer(Direction dir)
+    public int FindCellIndex(Position position)
     {
-        switch (dir)
+        return _cells.FindIndex(cell =>
+            cell.Position.X == position.X && cell.Position.Y == position.Y); // лямбда функция, возвращает номер в списке или -1 если нету
+    }
+
+    public bool TryMovePlayer(Direction dir)
+    {
+        Position offsetPosition = dir.ToPosition();
+
+        int index = FindCellIndex(_player.Position + offsetPosition);
+
+        if (index == -1 || !_player.BlockedCellTypes.Contains(_cells[index].Type))
         {
-            case Direction.North:
-
-                break;
-            case Direction.South:
-
-                break;
-            case Direction.East:
-
-                break;
-            case Direction.West:
-
-                break;
-            default:
-                throw new Exception("Ошибка при задании направления");
+            _player.SetPosition(_player.Position + offsetPosition);
+            return true;
         }
+        return false;
+    }
+    public override string ToString()
+    {
+        string result = "";
+
+        for (int y = 1; y <= _height; y++)
+        {
+            for (int x = 1; x <= _width; x++)
+            {
+                if (_player.Position == new Position(x, y ))
+                {
+                    result += "P";
+                    continue;
+                }
+
+                int index = FindCellIndex(new Position(x, y));
+                if (index == -1)
+                {
+                    result += ".";
+                    continue;
+                }
+
+
+                Cell cell = _cells[index];
+
+                result += cell.Type.ToSymbol();
+            }
+            result += "\n";
+        }
+
+        return result;
     }
 }
