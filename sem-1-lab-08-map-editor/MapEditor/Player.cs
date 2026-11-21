@@ -2,26 +2,24 @@
 
 public struct Player
 {
-    private Position _position;
-
-    public Position Position => _position;
+    public Position Pos;
 
     public void SetPosition(Position pos)
     {
-        _position = pos;
+        Pos = pos;
     }
 
     private CellType[] _blockedCellTypes; // типы ячеек, на которые игрок не может наступать
     public CellType[] BlockedCellTypes => _blockedCellTypes;
 
-    public Player(Position pos, CellType[] blockedTypes)
+    public Player(Position pos, CellType[] blockedCellTypes)
     {
-        _position = pos;
-        _blockedCellTypes = blockedTypes;
+        Pos = pos;
+        _blockedCellTypes = blockedCellTypes;
     }
     public Player(Position pos)
     {
-        _position = pos;
+        Pos = pos;
         _blockedCellTypes = new CellType[] { CellType.Wall, CellType.Water };
     }
 }

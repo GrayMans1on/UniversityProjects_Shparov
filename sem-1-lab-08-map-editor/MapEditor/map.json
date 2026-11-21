@@ -1,6 +1,6 @@
 {
   "Player": {
-    "Position": {
+    "Pos": {
       "X": 4,
       "Y": 2
     },
@@ -12,56 +12,56 @@
   "Cells": [
     {
       "Type": 1,
-      "Position": {
+      "Pos": {
         "X": 1,
         "Y": 2
       }
     },
     {
       "Type": 1,
-      "Position": {
+      "Pos": {
         "X": 1,
         "Y": 3
       }
     },
     {
       "Type": 0,
-      "Position": {
+      "Pos": {
         "X": 5,
         "Y": 1
       }
     },
     {
       "Type": 0,
-      "Position": {
+      "Pos": {
         "X": 6,
         "Y": 1
       }
     },
     {
       "Type": 0,
-      "Position": {
+      "Pos": {
         "X": 7,
         "Y": 1
       }
     },
     {
       "Type": 0,
-      "Position": {
+      "Pos": {
         "X": 8,
         "Y": 1
       }
     },
     {
       "Type": 0,
-      "Position": {
+      "Pos": {
         "X": 9,
         "Y": 1
       }
     },
     {
       "Type": 0,
-      "Position": {
+      "Pos": {
         "X": 10,
         "Y": 1
       }

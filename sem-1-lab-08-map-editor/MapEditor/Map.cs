@@ -23,7 +23,7 @@ public class Map
         List<Cell> removedCells = new List<Cell>();
         foreach (Cell cell in _cells)
         {
-            if (cell.Position.X > _width || cell.Position.Y > _height)
+            if (cell.Pos.X > _width || cell.Pos.Y > _height)
             {
                 removedCells.Add(cell);
             }
@@ -45,7 +45,7 @@ public class Map
         removedCells = new List<Cell>(); // клетки, оказавшиеся за пределами карты удаляются, но выводятся через out
         foreach (Cell cell in _cells)
         {
-            if (cell.Position.X > _width || cell.Position.Y > _height)
+            if (cell.Pos.X > _width || cell.Pos.Y > _height)
             {
                 removedCells.Add(cell);
             }
@@ -71,7 +71,7 @@ public class Map
 
     public bool AddCell(Cell cell)
     {
-        if (cell.Position.X > Width || cell.Position.Y > Height) { return false; }
+        if (cell.Pos.X > Width || cell.Pos.Y > Height) { return false; }
         _cells.Add(cell);
         return true;
     }
@@ -85,18 +85,18 @@ public class Map
     public int FindCellIndex(Position position)
     {
         return _cells.FindIndex(cell =>
-            cell.Position.X == position.X && cell.Position.Y == position.Y); // лямбда функция, возвращает номер в списке или -1 если нету
+            cell.Pos.X == position.X && cell.Pos.Y == position.Y); // лямбда функция, возвращает номер в списке или -1 если нету
     }
 
     public bool TryMovePlayer(Direction dir)
     {
         Position offsetPosition = dir.ToPosition();
 
-        int index = FindCellIndex(_player.Position + offsetPosition);
+        int index = FindCellIndex(_player.Pos + offsetPosition);
 
         if (index == -1 || !_player.BlockedCellTypes.Contains(_cells[index].Type))
         {
-            _player.SetPosition(_player.Position + offsetPosition);
+            _player.SetPosition(_player.Pos + offsetPosition);
             return true;
         }
         return false;
@@ -109,7 +109,7 @@ public class Map
         {
             for (int x = 1; x <= _width; x++)
             {
-                if (_player.Position == new Position(x, y ))
+                if (_player.Pos == new Position(x, y ))
                 {
                     result += "P";
                     continue;
@@ -134,7 +134,7 @@ public class Map
 
     public void ChangeCell(Cell newCell)  // п.2 изменение клеток
     {
-        int index = FindCellIndex(newCell.Position);
+        int index = FindCellIndex(newCell.Pos);
         if (index != -1)
         {
             RemoveCell(_cells[index]);

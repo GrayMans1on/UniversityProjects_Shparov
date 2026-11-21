@@ -2,20 +2,13 @@
 
 public struct Cell
 {
-    private CellType _type;
-    private Position _position;
+    public CellType Type;
+    public Position Pos;
 
     public Cell(CellType type, Position position)
     {
-        _type = type;
-        _position = position;
-    }
-    public CellType Type => _type;
-    public Position Position => _position;
-
-    public void ChangePosition(Position newPos)
-    {
-        _position = newPos;
+        Type = type;
+        Pos = position;
     }
 }
 public enum CellType

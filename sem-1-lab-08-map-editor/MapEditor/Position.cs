@@ -2,22 +2,13 @@
 
 public struct Position
 {
-    private int _x;
-    private int _y;
-
-    public int X => _x;
-    public int Y => _y;
-
-    public void SetPosition(int x, int y)
-    {
-        _x = x;
-        _y = y;
-    }
+    public int X;
+    public int Y;
 
     public Position(int x, int y)
     {
-        _x = x;
-        _y = y;
+        X = x;
+        Y = y;
     }
 
     public static Position operator +(Position pos1, Position pos2)
