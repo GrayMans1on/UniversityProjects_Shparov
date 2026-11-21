@@ -88,7 +88,7 @@ public class Map
             cell.Pos.X == position.X && cell.Pos.Y == position.Y); // лямбда функция, возвращает номер в списке или -1 если нету
     }
 
-    public bool TryMovePlayer(Direction dir)
+    public bool TryMovePlayer(Direction dir) // п. перемещение игрока
     {
         Position newPos = _player.Pos + dir.ToPosition();
 
