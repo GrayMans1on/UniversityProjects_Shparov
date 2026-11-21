@@ -1,4 +1,6 @@
-﻿namespace MapEditor;
+﻿using Newtonsoft.Json;
+
+namespace MapEditor;
 public class Program
 {
     static void Main()
@@ -16,7 +18,12 @@ public class Program
 
         Console.WriteLine(map);
 
-        while (true)
+        SaveMap(map, "..\\..\\..\\map.json");
+
+        Console.WriteLine(LoadMap("..\\..\\..\\map.json"));
+        return;
+
+        while (true) // перемещение игрока
         {
             Console.Clear();
             Console.WriteLine(map);
@@ -41,5 +48,19 @@ public class Program
                     return;
             }
         }
+    }
+
+
+    public static Map LoadMap(string path)
+    {
+        string json = File.ReadAllText(path);
+        Map map = JsonConvert.DeserializeObject<Map>(json);
+
+        return map;
+    }
+    public static void SaveMap(Map map, string path)
+    {
+        string json = JsonConvert.SerializeObject(map, Formatting.Indented);
+        File.WriteAllText(path, json);
     }
 }

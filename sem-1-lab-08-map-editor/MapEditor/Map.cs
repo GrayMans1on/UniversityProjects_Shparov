@@ -4,9 +4,10 @@ public class Map
 {
     private Player _player;
 
-    public Position PlayerPosition => _player.Position;
+    public Player Player => _player;
 
     private List<Cell> _cells;
+    public List<Cell> Cells => _cells;
 
     private int _width;
     private int _height;

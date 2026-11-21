@@ -1,0 +1,72 @@
+{
+  "Player": {
+    "Position": {
+      "X": 4,
+      "Y": 2
+    },
+    "BlockedCellTypes": [
+      0,
+      1
+    ]
+  },
+  "Cells": [
+    {
+      "Type": 1,
+      "Position": {
+        "X": 1,
+        "Y": 2
+      }
+    },
+    {
+      "Type": 1,
+      "Position": {
+        "X": 1,
+        "Y": 3
+      }
+    },
+    {
+      "Type": 0,
+      "Position": {
+        "X": 5,
+        "Y": 1
+      }
+    },
+    {
+      "Type": 0,
+      "Position": {
+        "X": 6,
+        "Y": 1
+      }
+    },
+    {
+      "Type": 0,
+      "Position": {
+        "X": 7,
+        "Y": 1
+      }
+    },
+    {
+      "Type": 0,
+      "Position": {
+        "X": 8,
+        "Y": 1
+      }
+    },
+    {
+      "Type": 0,
+      "Position": {
+        "X": 9,
+        "Y": 1
+      }
+    },
+    {
+      "Type": 0,
+      "Position": {
+        "X": 10,
+        "Y": 1
+      }
+    }
+  ],
+  "Width": 10,
+  "Height": 3
+}
