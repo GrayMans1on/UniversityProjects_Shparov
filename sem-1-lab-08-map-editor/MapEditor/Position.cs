@@ -10,14 +10,12 @@ public struct Position
 
     public void SetPosition(int x, int y)
     {
-        //if (x <= 0 || y <= 0) { throw new Exception("Координаты должны быть положительными значениями"); }
         _x = x;
         _y = y;
     }
 
     public Position(int x, int y)
     {
-        //if (x <= 0 || y <= 0) { throw new Exception("Координаты должны быть положительными значениями"); }
         _x = x;
         _y = y;
     }

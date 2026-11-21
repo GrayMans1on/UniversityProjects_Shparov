@@ -12,7 +12,7 @@ public class Program
         new Cell(CellType.Wall, new Position(8, 1)),
         new Cell(CellType.Wall, new Position(9, 1)),
         new Cell(CellType.Wall, new Position(10, 1)),
-        }, new Player(new Position(4, 2)));
+        }, new Player(new Position(4, 2)));  
 
         Console.WriteLine(map);
 

@@ -59,7 +59,7 @@ public class Map
         return removedCells.Count > 0;
     }
 
-    public Map(int width, int height, Cell[] cells, Player player)
+    public Map(int width, int height, Cell[] cells, Player player) // п.1 создание карты
     {
         if (width <= 0 || height <= 0) { throw new Exception("Размеры карты должны быть положительными"); }
         _width = width;
@@ -100,7 +100,7 @@ public class Map
         }
         return false;
     }
-    public override string ToString()
+    public override string ToString() // п.3 отображение карты в консоли
     {
         string result = "";
 
@@ -121,7 +121,6 @@ public class Map
                     continue;
                 }
 
-
                 Cell cell = _cells[index];
 
                 result += cell.Type.ToSymbol();
@@ -130,5 +129,15 @@ public class Map
         }
 
         return result;
+    }
+
+    public void ChangeCell(Cell newCell)  // п.2 изменение клеток
+    {
+        int index = FindCellIndex(newCell.Position);
+        if (index != -1)
+        {
+            RemoveCell(_cells[index]);
+        }
+        AddCell(newCell);
     }
 }
