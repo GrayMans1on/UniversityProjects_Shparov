@@ -90,15 +90,21 @@ public class Map
 
     public bool TryMovePlayer(Direction dir)
     {
-        Position offsetPosition = dir.ToPosition();
+        Position newPos = _player.Pos + dir.ToPosition();
 
-        int index = FindCellIndex(_player.Pos + offsetPosition);
+        if (newPos.X < 1 || newPos.X > Width || newPos.Y < 1 || newPos.Y > Height)
+        {
+            return false;
+        }
+
+        int index = FindCellIndex(newPos);
 
         if (index == -1 || !_player.BlockedCellTypes.Contains(_cells[index].Type))
         {
-            _player.SetPosition(_player.Pos + offsetPosition);
+            _player.SetPosition(newPos);
             return true;
         }
+
         return false;
     }
     public override string ToString() // п.3 отображение карты в консоли
