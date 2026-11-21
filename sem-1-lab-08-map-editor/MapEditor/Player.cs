@@ -9,18 +9,17 @@ public struct Player
         Pos = pos;
     }
 
-    private CellType[] _blockedCellTypes; // типы ячеек, на которые игрок не может наступать
-    public CellType[] BlockedCellTypes => _blockedCellTypes;
+    public CellType[] BlockedCellTypes;
 
     public Player(Position pos, CellType[] blockedCellTypes)
     {
         Pos = pos;
-        _blockedCellTypes = blockedCellTypes;
+        BlockedCellTypes = blockedCellTypes;
     }
     public Player(Position pos)
     {
         Pos = pos;
-        _blockedCellTypes = new CellType[] { CellType.Wall, CellType.Water };
+        BlockedCellTypes = new CellType[] { CellType.Wall, CellType.Water };
     }
 }
 public enum Direction
